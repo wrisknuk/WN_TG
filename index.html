@@ -1584,12 +1584,12 @@ function buildAboutTab() {
       '<div class="about-logo">' +
         '<img src="img/oldtg.png" alt="" onerror="this.style.display=\'none\'">' +
       '</div>' +
-      '<div class="app-name">OldTG ver ' + esc(APP_VERSION) + '</div>' +
-      '<div class="app-ver">Telegram-клиент в старом стиле</div>' +
-      '<div class="app-author">By ' + esc(APP_AUTHOR) + '</div>' +
+      '<div class="app-name">WN TG ver ' + esc(APP_VERSION) + '</div>' +
+      '<div class="app-ver">Модифицированный лаунчер мессенджера OldTG</div>' +
+      '<div class="app-author">By wrisknuk</div>' +
       '<div class="about-copy">' +
-        'OldTG ' + new Date().getFullYear() + '<br>' +
-        'Некоммерческий учебный проект' +
+        'WN TG ' + new Date().getFullYear() + '<br>' +
+        'Некомерческий проект' +
       '</div>' +
     '</div>';
 }
@@ -2005,6 +2005,50 @@ window.addEventListener('hashchange', function () {
       }
     }
   });
+})();
+  // Отдельный фикс: превращаем текстовые ссылки в кликабельные кнопки
+(function() {
+  // Добавляем красивый красный стиль для ссылок
+  const linkStyle = document.createElement('style');
+  linkStyle.textContent = `
+    .msg a, .message a, .msg-in a, .msg-out a, .link-clickable {
+      color: #e52e2e !important;
+      text-decoration: underline !important;
+      cursor: pointer !important;
+    }
+    .msg a:hover, .link-clickable:hover {
+      color: #b91c1c !important;
+    }
+  `;
+  document.head.appendChild(linkStyle);
+
+  // Функция автоматического поиска URL-адресов в тексте
+  function activateLinks(htmlText) {
+    const urlPattern = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return htmlText.replace(urlPattern, '<a href="\$1" target="_blank" class="link-clickable">\$1</a>');
+  }
+
+  // Наблюдатель, который автоматически сканирует новые сообщения на экране
+  const linkObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(node) {
+        if (node.nodeType === 1) {
+          const blocks = node.querySelectorAll('.msg-text, .message-text, .text, .msg, .msg-in, .msg-out');
+          blocks.forEach(function(box) {
+            if (!box.hasAttribute('data-links-ok') && box.innerHTML.includes('http')) {
+              box.setAttribute('data-links-ok', 'true');
+              box.innerHTML = activateLinks(box.innerHTML);
+            }
+          });
+        }
+      });
+    });
+  });
+
+  const msgsBox = document.getElementById('msgs');
+  if (msgsBox) {
+    linkObserver.observe(msgsBox, { childList: true, subtree: true });
+  }
 })();
 </script>
 </body>
