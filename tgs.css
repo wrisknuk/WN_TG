@@ -30,42 +30,28 @@ button, input, textarea, select {
 button { cursor: pointer; }
 img { display: block; max-width: 100%; }
 
-/* Фирменная красно-светлая тема для WN TG */
-html, :root, body, body.theme-dark, body.theme-light, body.theme-blue {
-  --bg-app: #fff0f0 !important;        /* Светлый нежно-розовый фон приложения */
-  --bg-panel: #ffe3e3 !important;      /* Светло-красная боковая панель */
-  --bg-panel-2: #ffd1d1 !important;    /* Панель активных элементов */
-  --bg-input: #ffffff !important;      /* Белое поле ввода */
-  --bg-hover: #ffbaba !important;      /* Цвет при наведении курсора */
-  --bg-active: #ff8a8a !important;     /* Цвет активного нажатия */
-  --bg-msg-in: #ffffff !important;     /* Белые входящие сообщения */
-  --bg-msg-out: #ffcccc !important;    /* Нежно-красные твои сообщения */
-  
-  --text-primary: #1a0000 !important;  /* Полностью ТЕМНЫЙ (почти черный) основной текст */
-  --text-secondary: #5c3a3a !important;/* ТЕМНЫЙ вторичный текст (даты, подписи) */
-  --text-muted: #7d5959 !important;    /* ТЕМНЫЙ приглушенный текст */
-  --text-link: #d61c1c !important;     /* Красные ссылки */
-  
-  --accent: #d61c1c !important;        /* Ярко-красный акцент */
-  --accent-hover: #b01313 !important;  /* Красный при наведении */
-  --accent-dark: #8a0f0f !important;   /* Темно-красный */
-  
-  --border: #f0abab !important;        /* Светло-красные границы */
-  --border-2: #e09292 !important;      /* Вторые границы */
-  --danger: #d9534f !important;        /* Ошибка/Опасность */
-  --online: #2e7d32 !important;        /* Зеленый онлайн */
-}
-
-/* Перекрашиваем верхнюю шапку в красный, а текст в ней делаем белым для контраста */
-.top-bar, #top-bar {
-  background-color: #d61c1c !important;
-  color: #ffffff !important;
-}
-
-/* Фиксируем светлый фон для области с сообщениями */
-.msgs, #msgs {
-  background-color: #fff0f0 !important;
-  background-image: none !important;
+body.theme-dark {
+  --bg-app: #ffffff !important;
+  --bg-panel: #ffffff !important;
+  --bg-panel-2: #f4f4f4 !important;
+  --bg-input: #f0f0f0 !important;
+  --bg-hover: #ffe5e5 !important;    /* Сделали нежно-красным вместо серого */
+  --bg-active: #ffbaba !important;   /* Сделали светло-красным вместо синеватого */
+  --bg-msg-in: #ffffff !important;
+  --bg-msg-out: #e1ffc7 !important;  /* Оригинальный цвет твоих сообщений */
+  --text-primary: #000000 !important;
+  --text-secondary: #7c7c7c !important;
+  --text-muted: #9b9b9b !important;
+  --text-link: #e52e2e !important;     /* Сделали красным вместо синего */
+  --accent: #e52e2e !important;        /* Сделали чистым красным */
+  --accent-hover: #b91c1c !important;  /* Сделали темно-красным */
+  --accent-dark: #8a0f0f !important;   /* Сделали бордовым */
+  --border: #e0e0e0 !important;
+  --border-2: #e8e8e8 !important;
+  --danger: #d9534f !important;
+  --online: #e52e2e !important;        /* Индикатор онлайн теперь красный */
+  --ripple: rgba(229, 46, 46, 0.06) !important; /* Красный эффект клика */
+  --scrim: rgba(0, 0, 0, 0.5) !important;
 }
 
 body.theme-light {
