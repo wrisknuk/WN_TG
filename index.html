@@ -133,40 +133,6 @@ var APP_VERSION = CFG.version;
 var APP_AUTHOR = CFG.author;
 var BOT_ID = CFG.botId;
 var BOT_TOPIC = 'bot_oldtgs'
-// Умный прокси: спасает только заблокированные чаты и людей
-const originalFetch = window.fetch;
-// Специальный транспортный прокси для POST и GET запросов мессенджера
-const originalFetch = window.fetch;
-window.fetch = function(url, options) {
-  if (typeof url === 'string' && (url.includes(API_MSG) || url.includes(API_ACC))) {
-    // Используем универсальный шлюз, который корректно пропускает POST методы
-    url = 'https://api.allorigins.win/get?url=' + encodeURIComponent(url);
-    
-    // Пересобираем запрос, чтобы мессенджер думал, что работает с оригинальным API
-    return originalFetch(url, options)
-      .then(res => res.json())
-      .then(data => {
-        // Вытаскиваем чистый текстовый ответ из контейнера прокси
-        return new Response(data.contents, {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' }
-        });
-      });
-  }
-  return originalFetch(url, options);
-};
-
-var DEFAULT_SETTINGS = {
-  theme: 'dark',
-  fontSize: 'medium',
-  density: 'normal',
-  chatBg: true,
-  enterToSend: true,
-  showUnreadBadge: true,
-  notificationsSound: false,
-  autoScroll: true,
-  showTimestamps: true
-};
 
 var Settings = (function () {
   var saved = null;
