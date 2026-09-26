@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#17212b">
-<title>OldTG</title>
+<title>WN TG</title>
 <link rel="stylesheet" href="tgs.css">
 </head>
 <body class="theme-dark font-medium density-normal">
@@ -12,7 +12,7 @@
 <div class="auth-screen" id="auth-screen">
   <div class="auth-box">
     <div class="auth-logo">
-      <img src="img/oldtg.png" alt="OldTG" onerror="this.style.display='none'">
+      <img src="img/oldtg.png" alt="WN TG" onerror="this.style.display='none'">
     </div>
 
     <h1 class="auth-title" id="auth-title">Вход</h1>
@@ -58,7 +58,7 @@
     <div class="menu-btn" id="menu-btn"><span></span><span></span><span></span></div>
     <div class="app-name">
       <img src="img/oldtg.png" alt="" onerror="this.style.display='none'">
-      OldTG
+      WN TG
     </div>
     <div class="user" id="user-area">
       <span class="uname" id="user-name"></span>
@@ -108,7 +108,7 @@
           <div class="big-icon">
             <img src="img/oldtg.png" alt="" onerror="this.style.display='none'">
           </div>
-          <div class="big-text">OldTG</div>
+          <div class="big-text">WN TG</div>
         </div>
       </div>
       <div class="input-row is-hidden" id="input-row">
@@ -132,7 +132,15 @@ var DEFAULT_AVATAR = CFG.defaultAvatar;
 var APP_VERSION = CFG.version;
 var APP_AUTHOR = CFG.author;
 var BOT_ID = CFG.botId;
-var BOT_TOPIC = 'bot_oldtgs';
+var BOT_TOPIC = 'bot_oldtgs'
+// Проксирование запросов к API для работы без VPN
+const originalFetch = window.fetch;
+window.fetch = function(url, options) {
+  if (typeof url === 'string' && (url.includes(API_MSG) || url.includes(API_ACC))) {
+    url = 'https://allorigins.win' + encodeURIComponent(url);
+  }
+  return originalFetch(url, options);
+};
 
 var DEFAULT_SETTINGS = {
   theme: 'dark',
