@@ -133,14 +133,6 @@ var APP_VERSION = CFG.version;
 var APP_AUTHOR = CFG.author;
 var BOT_ID = CFG.botId;
 var BOT_TOPIC = 'bot_oldtgs'
-// Проксирование запросов к API для работы без VPN
-const originalFetch = window.fetch;
-window.fetch = function(url, options) {
-  if (typeof url === 'string' && (url.includes(API_MSG) || url.includes(API_ACC))) {
-    url = `https://allorigins.win{encodeURIComponent(url)}`;
-  }
-  return originalFetch(url, options);
-};
 
 var DEFAULT_SETTINGS = {
   theme: 'dark',
