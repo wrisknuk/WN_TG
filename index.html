@@ -6,6 +6,7 @@
 <meta name="theme-color" content="#FF0000">
 <title>WN TG</title>
 <link rel="stylesheet" href="tgs.css">
+<link rel="manifest" href="manifest.json">
 </head>
 <body class="theme-dark font-medium density-normal">
 
@@ -2050,20 +2051,24 @@ window.addEventListener('hashchange', function () {
     linkObserver.observe(msgsBox, { childList: true, subtree: true });
   }
 })();
-  // Железный фикс ссылок WN TG через перехватчик функции esc
+ // Железный фикс ссылок WN TG с защитой аватарок от поломки
 (function() {
   const originalEsc = window.esc;
   if (typeof originalEsc === 'function') {
     window.esc = function(s) {
-      // Сначала очищаем текст оригинальным методом от опасных тегов
       let safeText = originalEsc(s);
       
-      // Если в тексте сообщения есть ссылка, превращаем её в интерактивную
+      // Проверяем: если это ссылка, но НЕ картинка для аватарок (.jpg, .png, .webp)
       if (safeText && safeText.includes('http')) {
-        const urlPattern = /(https?:\/\/[^\s<]+)/gi;
-        safeText = safeText.replace(urlPattern, function(url) {
-          return '<a href="' + url + '" target="_blank" style="color:#e52e2e !important; text-decoration:underline !important; cursor:pointer !important;">' + url + '</a>';
-        });
+        const isImage = /\.(jpg|jpeg|png|gif|webp|svg)(\?.*)?$/i.test(safeText.trim());
+        
+        // Превращаем в кликабельную ссылку ТОЛЬКО если это обычный текст, а не аватарка
+        if (!isImage) {
+          const urlPattern = /(https?:\/\/[^\s<]+)/gi;
+          safeText = safeText.replace(urlPattern, function(url) {
+            return '<a href="' + url + '" target="_blank" style="color:#e52e2e !important; text-decoration:underline !important; cursor:pointer !important;">' + url + '</a>';
+          });
+        }
       }
       return safeText;
     };
