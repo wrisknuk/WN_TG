@@ -1959,16 +1959,28 @@ if (S.isMobile) {
 window.addEventListener('hashchange', function () {
   if (S.me) handleDeepLink();
 });
-  // Финальный фикс WN TG: принудительное скругление и разворот каналов
+ // Финальный фикс WN TG: скругление, разворот каналов и ЧЕРНЫЙ текст сообщений
 (function() {
   const style = document.createElement('style');
   style.textContent = `
+    /* Скругление краев */
     .msg, .message, .msg-in, .msg-out, .message-box { 
       border-radius: 14px !important; 
       padding: 8px 14px !important; 
+      color: #000000 !important; /* ПРИНУДИТЕЛЬНО ЧЕРНЫЙ ТЕКСТ ДЛЯ ВСЕХ СООБЩЕНИЙ */
     }
     .msg-in { border-bottom-left-radius: 4px !important; }
     .msg-out { border-bottom-right-radius: 4px !important; }
+    
+    /* Делаем текст внутри бабблов черным, включая любые вложенные блоки */
+    .msg *, .message *, .msg-in *, .msg-out * {
+      color: #000000 !important;
+    }
+    
+    /* Время сообщения делаем аккуратным темно-серым, чтобы не сливалось */
+    .msg-time, .time, .message-time {
+      color: #555555 !important;
+    }
     
     /* Специфичный разворот только для контейнера сообщений в каналах */
     .app .main-block .right-col #msgs {
