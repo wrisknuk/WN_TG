@@ -1,0 +1,17 @@
+{
+  "name": "WN TG Launcher",
+  "short_name": "WN TG",
+  "description": "Модифицированный лаунчер мессенджера",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e52e2e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "img/oldtg.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
