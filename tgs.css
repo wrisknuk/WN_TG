@@ -30,19 +30,42 @@ button, input, textarea, select {
 button { cursor: pointer; }
 img { display: block; max-width: 100%; }
 
-/* Принудительный перекрас темной темы в фирменный красный WN TG */
-body.theme-dark {
-  --bg-color: #1a0a0a !important;               /* Глубокий темный фон */
-  --surface-color: #2d1515 !important;          /* Списки чатов и боковые панели */
-  --text-color: #f5e6e6 !important;             /* Основной светлый текст */
-  --text-secondary: #aa8888 !important;         /* Даты, подписи и статус */
-  --accent-color: #e52e2e !important;           /* Ярко-красные кнопки */
-  --accent-hover: #b91c1c !important;           /* Кнопки при наведении курсора */
-  --top-bar-bg: #5a1111 !important;             /* Верхняя шапка лаунчера */
-  --msg-in-bg: #3d1e1e !important;              /* Блоки входящих сообщений */
-  --msg-out-bg: #7f1d1d !important;             /* Блоки ваших сообщений */
-  --border-color: #421919 !important;           /* Линии-разделители между чатами */
+/* Фирменная красно-светлая тема для WN TG */
+html, :root, body, body.theme-dark, body.theme-light, body.theme-blue {
+  --bg-app: #fff0f0 !important;        /* Светлый нежно-розовый фон приложения */
+  --bg-panel: #ffe3e3 !important;      /* Светло-красная боковая панель */
+  --bg-panel-2: #ffd1d1 !important;    /* Панель активных элементов */
+  --bg-input: #ffffff !important;      /* Белое поле ввода */
+  --bg-hover: #ffbaba !important;      /* Цвет при наведении курсора */
+  --bg-active: #ff8a8a !important;     /* Цвет активного нажатия */
+  --bg-msg-in: #ffffff !important;     /* Белые входящие сообщения */
+  --bg-msg-out: #ffcccc !important;    /* Нежно-красные твои сообщения */
+  
+  --text-primary: #1a0000 !important;  /* Полностью ТЕМНЫЙ (почти черный) основной текст */
+  --text-secondary: #5c3a3a !important;/* ТЕМНЫЙ вторичный текст (даты, подписи) */
+  --text-muted: #7d5959 !important;    /* ТЕМНЫЙ приглушенный текст */
+  --text-link: #d61c1c !important;     /* Красные ссылки */
+  
+  --accent: #d61c1c !important;        /* Ярко-красный акцент */
+  --accent-hover: #b01313 !important;  /* Красный при наведении */
+  --accent-dark: #8a0f0f !important;   /* Темно-красный */
+  
+  --border: #f0abab !important;        /* Светло-красные границы */
+  --border-2: #e09292 !important;      /* Вторые границы */
+  --danger: #d9534f !important;        /* Ошибка/Опасность */
+  --online: #2e7d32 !important;        /* Зеленый онлайн */
+}
 
+/* Перекрашиваем верхнюю шапку в красный, а текст в ней делаем белым для контраста */
+.top-bar, #top-bar {
+  background-color: #d61c1c !important;
+  color: #ffffff !important;
+}
+
+/* Фиксируем светлый фон для области с сообщениями */
+.msgs, #msgs {
+  background-color: #fff0f0 !important;
+  background-image: none !important;
 }
 
 body.theme-light {
