@@ -73,12 +73,12 @@
       }
     },
     theme: {
-      desc: 'Сменить тему: dark | light | blue',
-      usage: 'theme <dark|light|blue>',
+      desc: 'Сменить тему: dark | light | blue | red',
+      usage: 'theme <dark|light|blue|red>',
       run: function (args) {
         if (!args.length) { print('Текущая тема: ' + Settings.get('theme'), 'info'); return true; }
         var t = args[0];
-        if (t !== 'dark' && t !== 'light' && t !== 'blue') { print('Допустимо: dark, light, blue', 'err'); return false; }
+        if (t !== 'dark' && t !== 'light' && t !== 'blue' && t !== 'red') { print('Допустимо: dark, light, blue, red', 'err'); return false; }
         Settings.set('theme', t);
         print('Тема: ' + t, 'ok');
         return true;
@@ -121,7 +121,7 @@
       }
     },
     users: {
-      desc: 'Показать количество пользователей в сети OldTG',
+      desc: 'Показать количество пользователей в сети WN TG',
       usage: 'users',
       run: function () {
         if (!window.S || !window.S.allUsers) { print('Нет данных', 'err'); return false; }
@@ -148,12 +148,12 @@
       }
     },
     version: {
-      desc: 'Показать версию OldTG',
+      desc: 'Показать версию WN TG',
       usage: 'version',
       run: function () {
-        var v = window.OLDTG_CONFIG ? window.OLDTG_CONFIG.version : '?';
-        var a = window.OLDTG_CONFIG ? window.OLDTG_CONFIG.author : '?';
-        print('OldTG ver ' + v, 'info');
+        var v = window.OLDTG_CONFIG ? window.OLDTG_CONFIG.version : '1.0.0';
+        var a = 'wrisknuk';
+        print('WN TG ver ' + v, 'info');
         print('By ' + a, 'info');
         return true;
       }
@@ -255,65 +255,60 @@
     closeBtn.textContent = 'X';
     closeBtn.onclick = closeDevConsole;
     header.appendChild(closeBtn);
-
     root.appendChild(header);
 
     var body = document.createElement('div');
     body.className = 'dev-console-body';
     root.appendChild(body);
 
-    var inputRow = document.createElement('div');
-    inputRow.className = 'dev-console-input-row';
+    var footer = document.createElement('div');
+    footer.className = 'dev-console-footer';
 
     var prompt = document.createElement('div');
     prompt.className = 'dev-console-prompt';
-    prompt.textContent = 'C:\\OldTG>';
-    inputRow.appendChild(prompt);
+    prompt.textContent = '>';
+    footer.appendChild(prompt);
 
     var input = document.createElement('input');
     input.className = 'dev-console-input';
     input.type = 'text';
-    input.autocomplete = 'off';
     input.spellcheck = false;
-    inputRow.appendChild(input);
+    input.autocapitalize = 'off';
+    input.autocomplete = 'off';
 
-    root.appendChild(inputRow);
-    document.body.appendChild(root);
-
-    print('WN TG Dev Console', 'info');
-    print('Введите help для списка команд', 'info');
-    print('', 'info');
-
-    input.addEventListener('keydown', function (e) {
+    input.onkeydown = function (e) {
       if (e.key === 'Enter') {
-        e.preventDefault();
-        var v = input.value;
+        var val = input.value;
         input.value = '';
-        execute(v);
+        execute(val);
       } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
         if (historyIndex > 0) {
           historyIndex--;
-          input.value = history[historyIndex] || '';
+          input.value = history[historyIndex];
         }
-      } else if (e.key === 'ArrowDown') {
         e.preventDefault();
+      } else if (e.key === 'ArrowDown') {
         if (historyIndex < history.length - 1) {
           historyIndex++;
-          input.value = history[historyIndex] || '';
+          input.value = history[historyIndex];
         } else {
           historyIndex = history.length;
           input.value = '';
         }
+        e.preventDefault();
       }
-    });
+    };
 
-    setTimeout(function () { input.focus(); }, 30);
+    footer.appendChild(input);
+    root.appendChild(footer);
+    document.body.appendChild(root);
+    input.focus();
+    print('WN TG Dev Console initialized. Type "help" for commands.', 'ok');
   }
 
   function closeDevConsole() {
-    var el = document.querySelector('.dev-console');
-    if (el) el.remove();
+    var root = document.querySelector('.dev-console');
+    if (root) root.remove();
   }
 
   window.openDevConsole = openDevConsole;
