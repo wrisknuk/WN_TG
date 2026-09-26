@@ -2050,6 +2050,25 @@ window.addEventListener('hashchange', function () {
     linkObserver.observe(msgsBox, { childList: true, subtree: true });
   }
 })();
+  // Железный фикс ссылок WN TG через перехватчик функции esc
+(function() {
+  const originalEsc = window.esc;
+  if (typeof originalEsc === 'function') {
+    window.esc = function(s) {
+      // Сначала очищаем текст оригинальным методом от опасных тегов
+      let safeText = originalEsc(s);
+      
+      // Если в тексте сообщения есть ссылка, превращаем её в интерактивную
+      if (safeText && safeText.includes('http')) {
+        const urlPattern = /(https?:\/\/[^\s<]+)/gi;
+        safeText = safeText.replace(urlPattern, function(url) {
+          return '<a href="' + url + '" target="_blank" style="color:#e52e2e !important; text-decoration:underline !important; cursor:pointer !important;">' + url + '</a>';
+        });
+      }
+      return safeText;
+    };
+  }
+})();
 </script>
 </body>
 </html>
