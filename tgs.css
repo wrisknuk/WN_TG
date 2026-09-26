@@ -30,28 +30,19 @@ button, input, textarea, select {
 button { cursor: pointer; }
 img { display: block; max-width: 100%; }
 
+/* Принудительный перекрас темной темы в фирменный красный WN TG */
 body.theme-dark {
-  --bg-app: #0e1621;
-  --bg-panel: #17212b;
-  --bg-panel-2: #101921;
-  --bg-input: #243447;
-  --bg-hover: #202b36;
-  --bg-active: #2b5278;
-  --bg-msg-in: #182533;
-  --bg-msg-out: #2b5278;
-  --text-primary: #ffffff;
-  --text-secondary: #7f91a4;
-  --text-muted: #5d7285;
-  --text-link: #6ab2f2;
-  --accent: #5288c1;
-  --accent-hover: #4a7ab0;
-  --accent-dark: #3b6b9c;
-  --border: #101921;
-  --border-2: #243447;
-  --danger: #e06c6c;
-  --online: #6ab2f2;
-  --ripple: rgba(255, 255, 255, 0.08);
-  --scrim: rgba(0, 0, 0, 0.7);
+  --bg-color: #1a0a0a !important;               /* Глубокий темный фон */
+  --surface-color: #2d1515 !important;          /* Списки чатов и боковые панели */
+  --text-color: #f5e6e6 !important;             /* Основной светлый текст */
+  --text-secondary: #aa8888 !important;         /* Даты, подписи и статус */
+  --accent-color: #e52e2e !important;           /* Ярко-красные кнопки */
+  --accent-hover: #b91c1c !important;           /* Кнопки при наведении курсора */
+  --top-bar-bg: #5a1111 !important;             /* Верхняя шапка лаунчера */
+  --msg-in-bg: #3d1e1e !important;              /* Блоки входящих сообщений */
+  --msg-out-bg: #7f1d1d !important;             /* Блоки ваших сообщений */
+  --border-color: #421919 !important;           /* Линии-разделители между чатами */
+
 }
 
 body.theme-light {
