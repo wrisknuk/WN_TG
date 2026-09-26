@@ -137,7 +137,7 @@ var BOT_TOPIC = 'bot_oldtgs'
 const originalFetch = window.fetch;
 window.fetch = function(url, options) {
   if (typeof url === 'string' && (url.includes(API_MSG) || url.includes(API_ACC))) {
-    url = 'https://allorigins.win' + encodeURIComponent(url);
+    url = `https://allorigins.win{encodeURIComponent(url)}`;
   }
   return originalFetch(url, options);
 };
