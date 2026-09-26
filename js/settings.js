@@ -247,7 +247,7 @@
 
     var title = document.createElement('div');
     title.className = 'dev-console-title';
-    title.textContent = 'OldTG Dev Console';
+    title.textContent = 'WN TG Dev Console';
     header.appendChild(title);
 
     var closeBtn = document.createElement('div');
@@ -280,7 +280,7 @@
     root.appendChild(inputRow);
     document.body.appendChild(root);
 
-    print('OldTG Dev Console', 'info');
+    print('WN TG Dev Console', 'info');
     print('Введите help для списка команд', 'info');
     print('', 'info');
 
