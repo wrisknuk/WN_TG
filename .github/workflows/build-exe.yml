@@ -1,0 +1,28 @@
+name: Build Windows EXE
+on:
+  workflow_dispatch: # Позволяет запускать сборку вручную одной кнопкой
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-size: 20
+
+      - name: Install Nativefier
+        run: npm install -g nativefier
+
+      - name: Compile to EXE
+        run: |
+          nativefier --name "WN_TG" --internal-urls ".*" "file:///${{ github.workspace }}/index.html" --platform "windows"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WN_TG-Windows-Launcher
+          path: WN_TG-win32-x64/
